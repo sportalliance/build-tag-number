@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Generate build number
-      uses: sportalliance/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v2
       with:
         token: ${{secrets.github_token}}        
     - name: Print new build number
@@ -27,13 +27,13 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: sportalliance/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v2
       with:
         token: ${{secrets.github_token}}        
     
     # Now you can pass ${{ steps.buildnumber.outputs.build_number }} to the next steps.
     - name: Another step as an example
-      uses: actions/hello-world-docker-action@v1
+      uses: actions/hello-world-docker-action@v2
       with:
         who-to-greet: ${{ steps.buildnumber.outputs.build_number }}
 ```
@@ -53,7 +53,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: sportalliance/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v2
       with:
         token: ${{secrets.github_token}}
           
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Another step as an example
-      uses: actions/hello-world-docker-action@v1
+      uses: actions/hello-world-docker-action@v2
       with:
         who-to-greet: ${{needs.job1.outputs.build_number}}
 ```
@@ -90,7 +90,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: sportalliance/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v2
       with:
         token: ${{ secrets.github_token }}
         prefix: client
@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Generate build number
-      uses: sportalliance/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v2
       with:
         token: ${{secrets.github_token}}        
         delete_previous_tag: false
@@ -125,7 +125,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Generate build number
-      uses: sportalliance/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v2
       with:
         token: ${{ steps.get-app-token.outputs.token }}
         token_type: app-installation-token
