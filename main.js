@@ -94,7 +94,7 @@ function main() {
     const validTokenTypes = ['pat', 'app-installation-token'];
     const tokenType = env.INPUT_TOKEN_TYPE || 'pat';
     if (!validTokenTypes.includes(tokenType)) {
-        fail(`ERROR: Invalid token-type "${tokenType}". Must be one of: ${validTokenTypes.join(', ')}.`);
+        fail(`ERROR: Invalid token_type "${tokenType}". Must be one of: ${validTokenTypes.join(', ')}.`);
     }
 
     request('GET', `/repos/${env.GITHUB_REPOSITORY}/git/refs/tags/${prefix}build-number-`, null, (err, status, result) => {

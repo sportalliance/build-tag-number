@@ -117,7 +117,7 @@ jobs:
 
 ### Optional: Token type
 
-By default, the action assumes a Personal Access Token (PAT) and uses `token <TOKEN>` as the `Authorization` header. If you are using a GitHub App installation token, set `token-type: app-installation-token` to use `Bearer <TOKEN>` instead:
+By default, the action assumes a Personal Access Token (PAT) and uses `token <TOKEN>` as the `Authorization` header. If you are using a GitHub App installation token, set `token_type: app-installation-token` to use `Bearer <TOKEN>` instead:
 
 ```yaml
 jobs:
@@ -128,10 +128,10 @@ jobs:
       uses: sportalliance/build-tag-number@v1
       with:
         token: ${{ steps.get-app-token.outputs.token }}
-        token-type: app-installation-token
+        token_type: app-installation-token
 ```
 
-Allowed values for `token-type`:
+Allowed values for `token_type`:
 
 | Value | Authorization header |
 |---|---|
