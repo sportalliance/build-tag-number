@@ -9,6 +9,14 @@ function fail(message, exitCode=1) {
     process.exit(1);
 }
 
+function getAuthorizationHeader() {
+    const tokenType = env.INPUT_TOKEN_TYPE || 'pat';
+    if (tokenType === 'app-installation-token') {
+        return `Bearer ${env.INPUT_TOKEN}`;
+    }
+    return `token ${env.INPUT_TOKEN}`;
+}
+
 function request(method, path, data, callback) {
     
     try {
@@ -24,7 +32,7 @@ function request(method, path, data, callback) {
                 'Content-Type': 'application/json',
                 'Content-Length': data ? data.length : 0,
                 'Accept-Encoding' : 'gzip',
-                'Authorization' : `token ${env.INPUT_TOKEN}`,
+                'Authorization' : getAuthorizationHeader(),
                 'User-Agent' : 'GitHub Action - development'
             }
         }
@@ -81,6 +89,12 @@ function main() {
         if (!env[varName]) {
             fail(`ERROR: Environment variable ${varName} is not defined.`);
         }
+    }
+
+    const validTokenTypes = ['pat', 'app-installation-token'];
+    const tokenType = env.INPUT_TOKEN_TYPE || 'pat';
+    if (!validTokenTypes.includes(tokenType)) {
+        fail(`ERROR: Invalid token-type "${tokenType}". Must be one of: ${validTokenTypes.join(', ')}.`);
     }
 
     request('GET', `/repos/${env.GITHUB_REPOSITORY}/git/refs/tags/${prefix}build-number-`, null, (err, status, result) => {

@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Generate build number
-      uses: onyxmueller/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v1
       with:
         token: ${{secrets.github_token}}        
     - name: Print new build number
@@ -27,7 +27,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: onyxmueller/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v1
       with:
         token: ${{secrets.github_token}}        
     
@@ -53,7 +53,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: onyxmueller/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v1
       with:
         token: ${{secrets.github_token}}
           
@@ -90,7 +90,7 @@ jobs:
     steps:
     - name: Generate build number
       id: buildnumber
-      uses: onyxmueller/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v1
       with:
         token: ${{ secrets.github_token }}
         prefix: client
@@ -109,11 +109,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Generate build number
-      uses: onyxmueller/build-tag-number@v1
+      uses: sportalliance/build-tag-number@v1
       with:
         token: ${{secrets.github_token}}        
         delete_previous_tag: false
 ```
+
+### Optional: Token type
+
+By default, the action assumes a Personal Access Token (PAT) and uses `token <TOKEN>` as the `Authorization` header. If you are using a GitHub App installation token, set `token-type: app-installation-token` to use `Bearer <TOKEN>` instead:
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Generate build number
+      uses: sportalliance/build-tag-number@v1
+      with:
+        token: ${{ steps.get-app-token.outputs.token }}
+        token-type: app-installation-token
+```
+
+Allowed values for `token-type`:
+
+| Value | Authorization header |
+|---|---|
+| `pat` (default) | `token <TOKEN>` |
+| `app-installation-token` | `Bearer <TOKEN>` |
 
 ## Branches and build numbers
 
