@@ -8,7 +8,7 @@ inputs:
   token:
     description: 'GitHub Token to create and delete refs (GITHUB_TOKEN)'
     required: false # Not required when getting the stored build number for later jobs, only in the first jobs when it's generated
-  token-type:
+  token_type:
     description: 'Type of token provided: pat (Personal Access Token) or app-installation-token. Determines the Authorization header scheme: "token" for pat, "Bearer" for app-installation-token. Defaults to pat.'
     required: false
     default: 'pat'
